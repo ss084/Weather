@@ -1,0 +1,22 @@
+name: Sync GitHub to Azure DevOps
+on:
+  push:
+    branches:
+      - '*'   # all branches in GitHub
+      - '!main'  # restrict to all branches except 'main'
+jobs:
+  sync-to-azure-devops:
+    runs-on: ubuntu-latest
+    environment: SyncGitHub2AzDevOps
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run script file
+      env:
+        AZ_PAT: ${{ secrets.AZ_PAT }}
+        AZ_USERNAME: ${{ secrets.AZ_USERNAME }}
+        AZ_EMAIL: ${{ secrets.AZ_EMAIL }}
+        AZ_ORG: ${{ secrets.AZ_ORG }}
+      run: |
+         chmod +x .github/commit.sh
+         ./.github/commit.sh
+      shell: bash
