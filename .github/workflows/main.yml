@@ -2,8 +2,8 @@ name: Sync GitHub to Azure DevOps
 on:
   push:
     branches:
-      - '*'   # all branches in GitHub
-      - '!main'  # restrict to all branches except 'main'
+      - '*'
+      - '!main'
 jobs:
   sync-to-azure-devops:
     runs-on: ubuntu-latest
